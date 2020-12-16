@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/recommendations_bottom_sheet_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bottom_sheet_title_margin"
+      android:ellipsize="end"
+      android:fontFamily="sans-serif"
+      android:maxLines="1"
+      android:textColor="@color/black"
+      android:textSize="@dimen/bottom_sheet_title_size"
+      android:text="@string/recommendation_bottom_sheet_title"/>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/divider_height"
+      android:background="@color/lighter_grey"/>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rec_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scrollbars="vertical"/>
+
+  <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+      android:id="@+id/effects_search_button"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/search_button_margin_bottom"
+      android:layout_gravity="bottom|center_horizontal"
+      android:fontFamily="sans-serif"
+      android:text="@string/product_search_button"
+      android:textColor="@color/black"
+      android:backgroundTint="@color/lighter_grey"
+      android:textSize="@dimen/search_button_text_size"
+      app:icon="@drawable/ic_image_search_vd_black_24"
+      app:iconTint="@color/black"/>
+
+</LinearLayout>

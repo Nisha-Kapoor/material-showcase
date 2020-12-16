@@ -1,0 +1,548 @@
+Index: app/src/main/res/layout/camera_preview_overlay.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<merge xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\">\n\n  <com.google.mlkit.md.camera.GraphicOverlay\n      android:id=\"@+id/camera_preview_graphic_overlay\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"/>\n\n  <FrameLayout\n      android:id=\"@+id/static_overlay_container\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"\n      android:background=\"@color/transparent\">\n\n    <ProgressBar\n        android:id=\"@+id/search_progress_bar\"\n        android:layout_width=\"@dimen/search_progress_bar_size\"\n        android:layout_height=\"@dimen/search_progress_bar_size\"\n        android:layout_gravity=\"center\"\n        android:indeterminate=\"true\"\n        android:indeterminateTint=\"@color/white\"\n        android:indeterminateTintMode=\"src_in\"\n        android:visibility=\"gone\"/>\n\n    <com.google.android.material.chip.Chip\n        android:id=\"@+id/bottom_prompt_chip\"\n        style=\"@style/Widget.MaterialComponents.Chip.Entry\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginBottom=\"@dimen/bottom_prompt_chip_margin_bottom\"\n        android:layout_gravity=\"bottom|center_horizontal\"\n        android:checkable=\"false\"\n        android:clickable=\"false\"\n        android:fontFamily=\"sans-serif\"\n        android:textColor=\"@color/white\"\n        android:textSize=\"@dimen/bottom_prompt_chip_text_size\"\n        android:visibility=\"gone\"\n        app:chipCornerRadius=\"@dimen/bottom_prompt_chip_corner_radius\"\n        app:chipSurfaceColor=\"@color/dark\"\n        app:closeIconVisible=\"false\"/>\n\n    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton\n        android:id=\"@+id/product_search_button\"\n        android:textStyle=\"bold\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginBottom=\"@dimen/search_button_margin_bottom\"\n        android:layout_gravity=\"bottom|center_horizontal\"\n        android:fontFamily=\"sans-serif\"\n        android:text=\"@string/product_search_button\"\n        android:textColor=\"@color/black\"\n        android:textSize=\"@dimen/search_button_text_size\"\n        android:visibility=\"gone\"\n        app:icon=\"@drawable/ic_image_search_vd_black_24\"\n        app:iconTint=\"@color/black\"/>\n  </FrameLayout>\n\n</merge>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/camera_preview_overlay.xml	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/res/layout/camera_preview_overlay.xml	(date 1607373388000)
+@@ -13,6 +13,23 @@
+       android:layout_height="match_parent"
+       android:background="@color/transparent">
+ 
++    <com.google.android.material.chip.Chip
++        android:id="@+id/top_prompt_chip"
++        style="@style/Widget.MaterialComponents.Chip.Entry"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_gravity="top|center_horizontal"
++        android:layout_marginTop="@dimen/bottom_prompt_chip_margin_bottom"
++        android:checkable="false"
++        android:clickable="false"
++        android:fontFamily="sans-serif"
++        android:textColor="@color/white"
++        android:textSize="@dimen/bottom_prompt_chip_text_size"
++        android:visibility="invisible"
++        app:chipCornerRadius="@dimen/bottom_prompt_chip_corner_radius"
++        app:chipSurfaceColor="@color/dark"
++        app:closeIconVisible="false" />
++
+     <ProgressBar
+         android:id="@+id/search_progress_bar"
+         android:layout_width="@dimen/search_progress_bar_size"
+@@ -28,17 +45,17 @@
+         style="@style/Widget.MaterialComponents.Chip.Entry"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginBottom="@dimen/bottom_prompt_chip_margin_bottom"
+         android:layout_gravity="bottom|center_horizontal"
++        android:layout_marginBottom="@dimen/bottom_prompt_chip_margin_bottom"
+         android:checkable="false"
+         android:clickable="false"
+         android:fontFamily="sans-serif"
+         android:textColor="@color/white"
+         android:textSize="@dimen/bottom_prompt_chip_text_size"
+-        android:visibility="gone"
++        android:visibility="invisible"
+         app:chipCornerRadius="@dimen/bottom_prompt_chip_corner_radius"
+         app:chipSurfaceColor="@color/dark"
+-        app:closeIconVisible="false"/>
++        app:closeIconVisible="false" />
+ 
+     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+         android:id="@+id/product_search_button"
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n  <string name=\"app_name\">MLKit Showcase</string>\n\n  <string name=\"entry_java_title\">Java</string>\n  <string name=\"entry_java_subtitle\">Run the MLKit Showcase written in Java.</string>\n  <string name=\"entry_kotlin_title\">Kotlin</string>\n  <string name=\"entry_kotlin_subtitle\">Run the MLKit Showcase written in Kotlin.</string>\n  <string name=\"mode_odt_live_title\">Object Detection: Live Camera</string>\n  <string name=\"mode_odt_live_subtitle\">A device’s live camera can be used to detect objects in an environment.</string>\n  <string name=\"mode_odt_static_title\">Object Detection: Static Image</string>\n  <string name=\"mode_odt_static_subtitle\">One or more objects can be detected from a provided image.</string>\n  <string name=\"mode_barcode_live_title\">Barcode Scanning</string>\n  <string name=\"mode_barcode_live_subtitle\">Read data encoded in most standard barcode formats.</string>\n  <string name=\"custom_model_live_title\">Object Detection: Live Camera with Custom Classification (Birds)</string>\n  <string name=\"custom_model_live_subtitle\">A device\\'s live camera can be used to detect birds in an environment.</string>\n  <string name=\"settings_title\">MLKit Showcase Settings</string>\n  <string name=\"cd_settings_button\">Settings</string>\n  <string name=\"cd_close_button\">Back</string>\n  <string name=\"cd_flash_button\">Toggle camera flash</string>\n  <string name=\"cd_photo_library_button\">Upload image</string>\n  <string name=\"prompt_point_at_an_object\">Point your camera at an object</string>\n  <string name=\"prompt_point_at_a_barcode\">Point your camera at a barcode</string>\n  <string name=\"prompt_point_at_a_bird\">Point your camera at a bird</string>\n  <string name=\"prompt_hold_camera_steady\">Keep camera still for a moment</string>\n  <string name=\"prompt_move_camera_closer\">Move closer to search</string>\n  <string name=\"prompt_searching\">Searching&#8230;</string>\n  <string name=\"product_search_button\">Search object</string>\n  <plurals name=\"bottom_sheet_title\">\n    <item quantity=\"one\">%d match found</item>\n    <item quantity=\"other\">%d matches found</item>\n  </plurals>\n  <string name=\"buttom_sheet_custom_model_title\">Custom object found</string>\n  <string name=\"static_image_prompt_detected_no_results\">No results found</string>\n  <string name=\"static_image_prompt_detected_results\">Tap on a dot to inspect</string>\n  <string name=\"static_image_card_no_result_title\">No result found</string>\n  <string name=\"static_image_card_no_result_subtitle\">Support text place holder</string>\n  <string name=\"static_image_preview_card_subtitle\">+%d more results</string>\n\n  <!-- Strings for camera settings. -->\n  <string name=\"pref_category_camera\">Camera</string>\n  <string name=\"pref_key_rear_camera_preview_size\" translatable=\"false\">rcpvs</string>\n  <string name=\"pref_key_rear_camera_picture_size\" translatable=\"false\">rcpts</string>\n  <string name=\"pref_title_rear_camera_preview_size\">Rear camera preview size</string>\n\n  <!-- Strings for object detection settings. -->\n  <string name=\"pref_category_object_detection\">Object detection</string>\n  <string name=\"pref_key_object_detector_enable_multiple_objects\" translatable=\"false\">odemo</string>\n  <string name=\"pref_title_object_detector_enable_multiple_objects\">Enable multiple objects</string>\n  <string name=\"pref_key_object_detector_enable_classification\" translatable=\"false\">odec</string>\n  <string name=\"pref_title_object_detector_enable_classification\">Enable classification</string>\n\n  <!-- Strings for product search settings. -->\n  <string name=\"pref_category_product_search\">Product search</string>\n  <string name=\"pref_key_enable_auto_search\" translatable=\"false\">pkeas</string>\n  <string name=\"pref_title_enable_auto_search\">Enable auto search</string>\n  <string name=\"pref_key_confirmation_time_in_manual_search\" translatable=\"false\">ctims</string>\n  <string name=\"pref_title_confirmation_time_in_manual_search\">Confirmation time in manual search</string>\n  <string name=\"pref_summary_confirmation_time_in_manual_search\">Ranges from 100ms to 1000ms</string>\n  <string name=\"pref_key_confirmation_time_in_auto_search\" translatable=\"false\">ctias</string>\n  <string name=\"pref_title_confirmation_time_in_auto_search\">Confirmation time in auto search</string>\n  <string name=\"pref_summary_confirmation_time_in_auto_search\">Ranges from 500ms to 2000ms</string>\n\n  <!-- Strings for barcode detection settings. -->\n  <string name=\"pref_category_barcode_detection\">Barcode detection</string>\n  <string name=\"pref_key_barcode_reticle_width\" translatable=\"false\">barcode_brw</string>\n  <string name=\"pref_title_barcode_reticle_width\">Barcode reticle width</string>\n  <string name=\"pref_summary_barcode_reticle_width\" formatted=\"false\">Relative to the camera view width, ranges from 50% to 95%</string>\n  <string name=\"pref_key_barcode_reticle_height\" translatable=\"false\">barcode_brh</string>\n  <string name=\"pref_title_barcode_reticle_height\">Barcode reticle height</string>\n  <string name=\"pref_summary_barcode_reticle_height\" formatted=\"false\">Relative to the camera view height, ranges from 20% to 80%</string>\n  <string name=\"pref_key_enable_barcode_size_check\" translatable=\"false\">barcode_ebsc</string>\n  <string name=\"pref_title_enable_barcode_size_check\">Enable barcode size check</string>\n  <string name=\"pref_summary_enable_barcode_size_check\">Will prompt user to move camera closer if the detected barcode is too small</string>\n  <string name=\"pref_key_minimum_barcode_width\" translatable=\"false\">barcode_mbw</string>\n  <string name=\"pref_title_minimum_barcode_width\">Minimum barcode width</string>\n  <string name=\"pref_summary_minimum_barcode_width\" formatted=\"false\">Relative to the reticle width, ranges from 20% to 80% (only applicable when barcode size check enabled)</string>\n  <string name=\"pref_key_delay_loading_barcode_result\" translatable=\"false\">barcode_dlbr</string>\n  <string name=\"pref_title_delay_loading_barcode_result\">Delay loading barcode result</string>\n  <string name=\"pref_summary_delay_loading_barcode_result\">Will show the loading spinner for 2s</string>\n\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/res/values/strings.xml	(date 1607416443000)
+@@ -25,11 +25,9 @@
+   <string name="prompt_hold_camera_steady">Keep camera still for a moment</string>
+   <string name="prompt_move_camera_closer">Move closer to search</string>
+   <string name="prompt_searching">Searching&#8230;</string>
+-  <string name="product_search_button">Search object</string>
+-  <plurals name="bottom_sheet_title">
+-    <item quantity="one">%d match found</item>
+-    <item quantity="other">%d matches found</item>
+-  </plurals>
++  <string name="product_search_button">Create Product Shot</string>
++  <string name="recommendation_bottom_sheet_title"> Camera Time Recommendations</string>
++  <string name="effect_bottom_sheet_title"> Generate Video Effects</string>
+   <string name="buttom_sheet_custom_model_title">Custom object found</string>
+   <string name="static_image_prompt_detected_no_results">No results found</string>
+   <string name="static_image_prompt_detected_results">Tap on a dot to inspect</string>
+Index: app/src/main/res/layout/product_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:paddingTop=\"@dimen/product_item_padding\"\n    android:paddingStart=\"@dimen/product_item_padding\"\n    android:paddingEnd=\"@dimen/product_item_padding\">\n\n  <ImageView\n      android:id=\"@+id/product_image\"\n      android:layout_width=\"@dimen/product_item_image_size\"\n      android:layout_height=\"@dimen/product_item_image_size\"\n      android:layout_marginEnd=\"@dimen/product_item_image_margin_end\"\n      android:contentDescription=\"@null\"/>\n\n  <TextView\n      android:id=\"@+id/product_title\"\n      android:layout_width=\"wrap_content\"\n      android:layout_height=\"wrap_content\"\n      android:layout_alignTop=\"@+id/product_image\"\n      android:layout_toEndOf=\"@id/product_image\"\n      android:maxLines=\"1\"\n      android:textColor=\"@color/black\"\n      android:textSize=\"@dimen/product_item_title_size\"/>\n\n  <TextView\n      android:id=\"@+id/product_subtitle\"\n      android:layout_width=\"wrap_content\"\n      android:layout_height=\"wrap_content\"\n      android:layout_below=\"@+id/product_title\"\n      android:layout_toEndOf=\"@id/product_image\"\n      android:maxLines=\"2\"\n      android:textColor=\"@color/product_description\"\n      android:textSize=\"@dimen/product_item_subtitle_size\"/>\n\n  <View\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"@dimen/divider_height\"\n      android:layout_marginTop=\"@dimen/product_item_padding\"\n      android:layout_below=\"@+id/product_image\"\n      android:background=\"@color/lighter_grey\"/>\n\n</RelativeLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/product_item.xml	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/res/layout/product_item.xml	(date 1607487958000)
+@@ -34,6 +34,17 @@
+       android:textColor="@color/product_description"
+       android:textSize="@dimen/product_item_subtitle_size"/>
+ 
++  <TextView
++      android:id="@+id/recommendation"
++      android:layout_width="wrap_content"
++      android:layout_height="wrap_content"
++      android:textColor="@color/black"
++      android:lineHeight="15sp"
++      android:textFontWeight="900"
++      android:fontFamily="Roboto"
++      android:textAllCaps="true"
++      android:textSize="13sp"/>
++
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/divider_height"
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n  <dimen name=\"home_page_title_size\">18sp</dimen>\n  <dimen name=\"home_page_title_padding_top\">32dp</dimen>\n  <dimen name=\"home_page_title_padding_bottom\">16dp</dimen>\n  <dimen name=\"home_page_mode_item_padding_horizontal\">24dp</dimen>\n  <dimen name=\"home_page_mode_item_title_size\">16sp</dimen>\n  <dimen name=\"home_page_mode_item_title_padding_top\">16dp</dimen>\n  <dimen name=\"home_page_mode_item_title_padding_bottom\">8dp</dimen>\n  <dimen name=\"home_page_mode_item_subtitle_size\">14sp</dimen>\n  <dimen name=\"home_page_mode_item_subtitle_padding_bottom\">24dp</dimen>\n  <dimen name=\"top_action_bar_padding_horizontal\">8dp</dimen>\n  <dimen name=\"top_action_bar_height\">64dp</dimen>\n  <dimen name=\"top_action_button_padding\">12dp</dimen>\n  <dimen name=\"search_progress_bar_size\">48dp</dimen>\n  <dimen name=\"search_button_text_size\">16sp</dimen>\n  <dimen name=\"search_button_margin_bottom\">24dp</dimen>\n  <dimen name=\"bottom_prompt_chip_text_size\">14sp</dimen>\n  <dimen name=\"bottom_prompt_chip_margin_bottom\">28dp</dimen>\n  <dimen name=\"bottom_prompt_chip_corner_radius\">8dp</dimen>\n  <dimen name=\"bottom_sheet_title_margin\">16dp</dimen>\n  <dimen name=\"bottom_sheet_title_size\">16sp</dimen>\n  <dimen name=\"bounding_box_stroke_width\">1dp</dimen>\n  <dimen name=\"bounding_box_confirmed_stroke_width\">2dp</dimen>\n  <dimen name=\"bounding_box_corner_radius\">12dp</dimen>\n  <dimen name=\"product_item_padding\">16dp</dimen>\n  <dimen name=\"product_item_image_size\">80dp</dimen>\n  <dimen name=\"product_item_image_margin_end\">16dp</dimen>\n  <dimen name=\"product_item_title_size\">18sp</dimen>\n  <dimen name=\"product_item_subtitle_size\">14sp</dimen>\n  <dimen name=\"object_reticle_ripple_stroke_width\">4dp</dimen>\n  <dimen name=\"object_reticle_ripple_size_offset\">24dp</dimen>\n  <dimen name=\"object_reticle_outer_ring_fill_radius\">22dp</dimen>\n  <dimen name=\"object_reticle_outer_ring_stroke_radius\">24dp</dimen>\n  <dimen name=\"object_reticle_outer_ring_stroke_width\">4dp</dimen>\n  <dimen name=\"object_reticle_inner_ring_stroke_radius\">14dp</dimen>\n  <dimen name=\"object_reticle_inner_ring_stroke_width\">2dp</dimen>\n  <dimen name=\"object_selection_distance_threshold\">24dp</dimen>\n  <dimen name=\"object_dot_radius\">@dimen/object_reticle_inner_ring_stroke_radius</dimen>\n  <dimen name=\"object_thumbnail_height\">120dp</dimen>\n  <dimen name=\"object_thumbnail_margin\">24dp</dimen>\n  <dimen name=\"object_thumbnail_stroke_width\">@dimen/bounding_box_confirmed_stroke_width</dimen>\n  <dimen name=\"preview_card_carousel_padding_top\">16dp</dimen>\n  <dimen name=\"preview_card_carousel_padding_bottom\">8dp</dimen>\n  <dimen name=\"preview_card_carousel_height\">120dp</dimen>\n  <dimen name=\"preview_card_width\">240dp</dimen>\n  <dimen name=\"preview_card_height\">96dp</dimen>\n  <dimen name=\"preview_card_spacing\">8dp</dimen>\n  <dimen name=\"preview_card_corner_radius\">8dp</dimen>\n  <dimen name=\"preview_card_image_size\">80dp</dimen>\n  <dimen name=\"preview_card_image_margin\">8dp</dimen>\n  <dimen name=\"preview_card_title_text_size\">14sp</dimen>\n  <dimen name=\"preview_card_title_padding_top\">12dp</dimen>\n  <dimen name=\"preview_card_subtitle_text_size\">14sp</dimen>\n  <dimen name=\"preview_card_subtitle_padding_top\">4dp</dimen>\n  <dimen name=\"static_image_dot_view_size\">48dp</dimen>\n  <dimen name=\"static_image_dot_radius_selected\">14dp</dimen>\n  <dimen name=\"static_image_dot_radius_unselected\">10dp</dimen>\n  <dimen name=\"static_image_view_padding_horizontal\">16dp</dimen>\n  <dimen name=\"static_image_loading_view_text_size\">14sp</dimen>\n  <dimen name=\"static_image_loading_view_text_margin_bottom\">32dp</dimen>\n  <dimen name=\"barcode_bottom_sheet_padding_vertical\">12dp</dimen>\n  <dimen name=\"barcode_reticle_ripple_stroke_width\">4dp</dimen>\n  <dimen name=\"barcode_reticle_ripple_size_offset\">40dp</dimen>\n  <dimen name=\"barcode_reticle_stroke_width\">4dp</dimen>\n  <dimen name=\"barcode_reticle_corner_radius\">8dp</dimen>\n  <dimen name=\"barcode_field_padding_horizontal\">24dp</dimen>\n  <dimen name=\"barcode_field_padding_vertical\">12dp</dimen>\n  <dimen name=\"barcode_field_value_size\">16sp</dimen>\n  <dimen name=\"barcode_field_value_padding\">16dp</dimen>\n  <dimen name=\"barcode_field_label_size\">12sp</dimen>\n  <dimen name=\"barcode_field_label_padding\">4dp</dimen>\n  <dimen name=\"divider_height\">1dp</dimen>\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/dimens.xml	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/res/values/dimens.xml	(date 1607544154000)
+@@ -19,7 +19,7 @@
+   <dimen name="bottom_prompt_chip_margin_bottom">28dp</dimen>
+   <dimen name="bottom_prompt_chip_corner_radius">8dp</dimen>
+   <dimen name="bottom_sheet_title_margin">16dp</dimen>
+-  <dimen name="bottom_sheet_title_size">16sp</dimen>
++  <dimen name="bottom_sheet_title_size">20sp</dimen>
+   <dimen name="bounding_box_stroke_width">1dp</dimen>
+   <dimen name="bounding_box_confirmed_stroke_width">2dp</dimen>
+   <dimen name="bounding_box_corner_radius">12dp</dimen>
+Index: app/src/main/res/layout/activity_static_object.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.coordinatorlayout.widget.CoordinatorLayout\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\">\n\n  <include\n      layout=\"@layout/top_action_bar_in_static_image\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"@dimen/top_action_bar_height\"\n      android:layout_gravity=\"top\"/>\n\n  <ImageView\n      android:id=\"@+id/input_image_view\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"\n      android:layout_marginTop=\"@dimen/top_action_bar_height\"\n      android:layout_marginBottom=\"@dimen/preview_card_carousel_height\"\n      android:paddingStart=\"@dimen/static_image_view_padding_horizontal\"\n      android:paddingEnd=\"@dimen/static_image_view_padding_horizontal\"\n      android:contentDescription=\"@null\"/>\n\n  <FrameLayout\n      android:id=\"@+id/dot_view_container\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"\n      android:layout_marginTop=\"@dimen/top_action_bar_height\"\n      android:layout_marginBottom=\"@dimen/preview_card_carousel_height\"\n      android:background=\"@color/transparent\"/>\n\n  <com.google.android.material.chip.Chip\n      android:id=\"@+id/bottom_prompt_chip\"\n      style=\"@style/Widget.MaterialComponents.Chip.Entry\"\n      android:layout_width=\"wrap_content\"\n      android:layout_height=\"wrap_content\"\n      android:layout_marginBottom=\"@dimen/preview_card_carousel_height\"\n      android:layout_gravity=\"bottom|center_horizontal\"\n      android:checkable=\"false\"\n      android:clickable=\"false\"\n      android:fontFamily=\"sans-serif\"\n      android:textColor=\"@color/white\"\n      android:textSize=\"@dimen/bottom_prompt_chip_text_size\"\n      android:visibility=\"gone\"\n      app:chipCornerRadius=\"@dimen/bottom_prompt_chip_corner_radius\"\n      app:chipSurfaceColor=\"@color/dark\"\n      app:closeIconVisible=\"false\"/>\n\n  <androidx.recyclerview.widget.RecyclerView\n      android:id=\"@+id/card_recycler_view\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"@dimen/preview_card_carousel_height\"\n      android:layout_gravity=\"bottom\"\n      android:paddingBottom=\"@dimen/preview_card_carousel_padding_bottom\"\n      android:paddingTop=\"@dimen/preview_card_carousel_padding_top\"/>\n\n  <FrameLayout\n      android:id=\"@+id/loading_view\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"\n      android:background=\"@color/dark\"\n      android:visibility=\"gone\">\n\n    <ProgressBar\n        android:layout_width=\"@dimen/search_progress_bar_size\"\n        android:layout_height=\"@dimen/search_progress_bar_size\"\n        android:layout_gravity=\"center\"\n        android:indeterminate=\"true\"\n        android:indeterminateTint=\"@color/white\"\n        android:indeterminateTintMode=\"src_in\"/>\n\n    <TextView\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginBottom=\"@dimen/static_image_loading_view_text_margin_bottom\"\n        android:layout_gravity=\"bottom|center_horizontal\"\n        android:text=\"@string/prompt_searching\"\n        android:textColor=\"@color/white\"\n        android:textSize=\"@dimen/static_image_loading_view_text_size\"/>\n\n  </FrameLayout>\n\n  <com.google.mlkit.md.productsearch.BottomSheetScrimView\n      android:id=\"@+id/bottom_sheet_scrim_view\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"\n      android:visibility=\"gone\"/>\n\n  <include\n      android:id=\"@+id/bottom_sheet\"\n      layout=\"@layout/product_bottom_sheet\"\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      app:behavior_hideable=\"true\"\n      app:layout_behavior=\"com.google.android.material.bottomsheet.BottomSheetBehavior\"/>\n\n</androidx.coordinatorlayout.widget.CoordinatorLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_static_object.xml	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/res/layout/activity_static_object.xml	(date 1607373410000)
+@@ -29,6 +29,23 @@
+       android:layout_marginBottom="@dimen/preview_card_carousel_height"
+       android:background="@color/transparent"/>
+ 
++  <com.google.android.material.chip.Chip
++      android:id="@+id/top_prompt_chip"
++      style="@style/Widget.MaterialComponents.Chip.Entry"
++      android:layout_width="wrap_content"
++      android:layout_height="wrap_content"
++      android:layout_gravity="top|center_horizontal"
++      android:layout_marginTop="@dimen/bottom_prompt_chip_margin_bottom"
++      android:checkable="false"
++      android:clickable="false"
++      android:fontFamily="sans-serif"
++      android:textColor="@color/white"
++      android:textSize="@dimen/bottom_prompt_chip_text_size"
++      android:visibility="invisible"
++      app:chipCornerRadius="@dimen/bottom_prompt_chip_corner_radius"
++      app:chipSurfaceColor="@color/dark"
++      app:closeIconVisible="false" />
++
+   <com.google.android.material.chip.Chip
+       android:id="@+id/bottom_prompt_chip"
+       style="@style/Widget.MaterialComponents.Chip.Entry"
+Index: app/src/main/java/com/google/mlkit/md/LiveObjectDetectionActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n * Copyright 2020 Google LLC\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *     https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n\npackage com.google.mlkit.md\n\nimport android.animation.AnimatorInflater\nimport android.animation.AnimatorSet\nimport android.content.Intent\nimport android.graphics.Bitmap\nimport android.graphics.Color\nimport android.hardware.Camera\nimport android.os.Bundle\nimport android.util.Log\nimport android.view.View\nimport android.view.View.OnClickListener\nimport android.widget.ProgressBar\nimport android.widget.TextView\nimport androidx.appcompat.app.AppCompatActivity\nimport androidx.lifecycle.Observer\nimport androidx.lifecycle.ViewModelProviders\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport com.google.android.material.bottomsheet.BottomSheetBehavior\nimport com.google.android.material.chip.Chip\nimport com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton\nimport com.google.common.base.Objects\nimport com.google.common.collect.ImmutableList\nimport com.google.mlkit.md.camera.GraphicOverlay\nimport com.google.mlkit.md.camera.WorkflowModel\nimport com.google.mlkit.md.camera.WorkflowModel.WorkflowState\nimport com.google.mlkit.md.camera.CameraSource\nimport com.google.mlkit.md.camera.CameraSourcePreview\nimport com.google.mlkit.md.objectdetection.MultiObjectProcessor\nimport com.google.mlkit.md.objectdetection.ProminentObjectProcessor\nimport com.google.mlkit.md.productsearch.BottomSheetScrimView\nimport com.google.mlkit.md.productsearch.ProductAdapter\nimport com.google.mlkit.md.productsearch.SearchEngine\nimport com.google.mlkit.md.settings.PreferenceUtils\nimport com.google.mlkit.md.settings.SettingsActivity\nimport java.io.IOException\n\n/** Demonstrates the object detection and visual search workflow using camera preview.  */\nclass LiveObjectDetectionActivity : AppCompatActivity(), OnClickListener {\n\n    private var cameraSource: CameraSource? = null\n    private var preview: CameraSourcePreview? = null\n    private var graphicOverlay: GraphicOverlay? = null\n    private var settingsButton: View? = null\n    private var flashButton: View? = null\n    private var promptChip: Chip? = null\n    private var promptChipAnimator: AnimatorSet? = null\n    private var searchButton: ExtendedFloatingActionButton? = null\n    private var searchButtonAnimator: AnimatorSet? = null\n    private var searchProgressBar: ProgressBar? = null\n    private var workflowModel: WorkflowModel? = null\n    private var currentWorkflowState: WorkflowState? = null\n    private var searchEngine: SearchEngine? = null\n\n    private var bottomSheetBehavior: BottomSheetBehavior<View>? = null\n    private var bottomSheetScrimView: BottomSheetScrimView? = null\n    private var productRecyclerView: RecyclerView? = null\n    private var bottomSheetTitleView: TextView? = null\n    private var objectThumbnailForBottomSheet: Bitmap? = null\n    private var slidingSheetUpFromHiddenState: Boolean = false\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n\n        searchEngine = SearchEngine(applicationContext)\n\n        setContentView(R.layout.activity_live_object)\n        preview = findViewById(R.id.camera_preview)\n        graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {\n            setOnClickListener(this@LiveObjectDetectionActivity)\n            cameraSource = CameraSource(this)\n        }\n        promptChip = findViewById(R.id.bottom_prompt_chip)\n        promptChipAnimator =\n            (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {\n                setTarget(promptChip)\n            }\n        searchButton = findViewById<ExtendedFloatingActionButton>(R.id.product_search_button).apply {\n            setOnClickListener(this@LiveObjectDetectionActivity)\n        }\n        searchButtonAnimator =\n            (AnimatorInflater.loadAnimator(this, R.animator.search_button_enter) as AnimatorSet).apply {\n                setTarget(searchButton)\n            }\n        searchProgressBar = findViewById(R.id.search_progress_bar)\n        setUpBottomSheet()\n        findViewById<View>(R.id.close_button).setOnClickListener(this)\n        flashButton = findViewById<View>(R.id.flash_button).apply {\n            setOnClickListener(this@LiveObjectDetectionActivity)\n        }\n        settingsButton = findViewById<View>(R.id.settings_button).apply {\n            setOnClickListener(this@LiveObjectDetectionActivity)\n        }\n        setUpWorkflowModel()\n    }\n\n    override fun onResume() {\n        super.onResume()\n\n        workflowModel?.markCameraFrozen()\n        settingsButton?.isEnabled = true\n        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN\n        currentWorkflowState = WorkflowState.NOT_STARTED\n        cameraSource?.setFrameProcessor(\n            if (PreferenceUtils.isMultipleObjectsMode(this)) {\n                MultiObjectProcessor(graphicOverlay!!, workflowModel!!)\n            } else {\n                ProminentObjectProcessor(graphicOverlay!!, workflowModel!!)\n            }\n        )\n        workflowModel?.setWorkflowState(WorkflowState.DETECTING)\n    }\n\n    override fun onPause() {\n        super.onPause()\n        currentWorkflowState = WorkflowState.NOT_STARTED\n        stopCameraPreview()\n    }\n\n    override fun onDestroy() {\n        super.onDestroy()\n        cameraSource?.release()\n        cameraSource = null\n        searchEngine?.shutdown()\n    }\n\n    override fun onBackPressed() {\n        if (bottomSheetBehavior?.state != BottomSheetBehavior.STATE_HIDDEN) {\n            bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)\n        } else {\n            super.onBackPressed()\n        }\n    }\n\n    override fun onClick(view: View) {\n        when (view.id) {\n            R.id.product_search_button -> {\n                searchButton?.isEnabled = false\n                workflowModel?.onSearchButtonClicked()\n            }\n            R.id.bottom_sheet_scrim_view -> bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)\n            R.id.close_button -> onBackPressed()\n            R.id.flash_button -> {\n                if (flashButton?.isSelected == true) {\n                    flashButton?.isSelected = false\n                    cameraSource?.updateFlashMode(Camera.Parameters.FLASH_MODE_OFF)\n                } else {\n                    flashButton?.isSelected = true\n                    cameraSource?.updateFlashMode(Camera.Parameters.FLASH_MODE_TORCH)\n                }\n            }\n            R.id.settings_button -> {\n                settingsButton?.isEnabled = false\n                startActivity(Intent(this, SettingsActivity::class.java))\n            }\n        }\n    }\n\n    private fun startCameraPreview() {\n        val cameraSource = this.cameraSource ?: return\n        val workflowModel = this.workflowModel ?: return\n        if (!workflowModel.isCameraLive) {\n            try {\n                workflowModel.markCameraLive()\n                preview?.start(cameraSource)\n            } catch (e: IOException) {\n                Log.e(TAG, \"Failed to start camera preview!\", e)\n                cameraSource.release()\n                this.cameraSource = null\n            }\n        }\n    }\n\n    private fun stopCameraPreview() {\n        if (workflowModel?.isCameraLive == true) {\n            workflowModel!!.markCameraFrozen()\n            flashButton?.isSelected = false\n            preview?.stop()\n        }\n    }\n\n    private fun setUpBottomSheet() {\n        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet))\n        bottomSheetBehavior?.setBottomSheetCallback(\n            object : BottomSheetBehavior.BottomSheetCallback() {\n                override fun onStateChanged(bottomSheet: View, newState: Int) {\n                    Log.d(TAG, \"Bottom sheet new state: $newState\")\n                    bottomSheetScrimView?.visibility =\n                        if (newState == BottomSheetBehavior.STATE_HIDDEN) View.GONE else View.VISIBLE\n                    graphicOverlay?.clear()\n\n                    when (newState) {\n                        BottomSheetBehavior.STATE_HIDDEN -> workflowModel?.setWorkflowState(WorkflowState.DETECTING)\n                        BottomSheetBehavior.STATE_COLLAPSED,\n                        BottomSheetBehavior.STATE_EXPANDED,\n                        BottomSheetBehavior.STATE_HALF_EXPANDED -> slidingSheetUpFromHiddenState = false\n                        BottomSheetBehavior.STATE_DRAGGING, BottomSheetBehavior.STATE_SETTLING -> {\n                        }\n                    }\n                }\n\n                override fun onSlide(bottomSheet: View, slideOffset: Float) {\n                    val searchedObject = workflowModel!!.searchedObject.value\n                    if (searchedObject == null || java.lang.Float.isNaN(slideOffset)) {\n                        return\n                    }\n\n                    val graphicOverlay = graphicOverlay ?: return\n                    val bottomSheetBehavior = bottomSheetBehavior ?: return\n                    val collapsedStateHeight = bottomSheetBehavior.peekHeight.coerceAtMost(bottomSheet.height)\n                    val bottomBitmap = objectThumbnailForBottomSheet ?: return\n                    if (slidingSheetUpFromHiddenState) {\n                        val thumbnailSrcRect = graphicOverlay.translateRect(searchedObject.boundingBox)\n                        bottomSheetScrimView?.updateWithThumbnailTranslateAndScale(\n                            bottomBitmap,\n                            collapsedStateHeight,\n                            slideOffset,\n                            thumbnailSrcRect\n                        )\n                    } else {\n                        bottomSheetScrimView?.updateWithThumbnailTranslate(\n                            bottomBitmap, collapsedStateHeight, slideOffset, bottomSheet\n                        )\n                    }\n                }\n            })\n\n        bottomSheetScrimView = findViewById<BottomSheetScrimView>(R.id.bottom_sheet_scrim_view).apply {\n            setOnClickListener(this@LiveObjectDetectionActivity)\n        }\n\n        bottomSheetTitleView = findViewById(R.id.bottom_sheet_title)\n        productRecyclerView = findViewById<RecyclerView>(R.id.product_recycler_view).apply {\n            setHasFixedSize(true)\n            layoutManager = LinearLayoutManager(this@LiveObjectDetectionActivity)\n            adapter = ProductAdapter(ImmutableList.of())\n        }\n    }\n\n    private fun setUpWorkflowModel() {\n        workflowModel = ViewModelProviders.of(this).get(WorkflowModel::class.java).apply {\n\n            // Observes the workflow state changes, if happens, update the overlay view indicators and\n            // camera preview state.\n            workflowState.observe(this@LiveObjectDetectionActivity, Observer { workflowState ->\n                if (workflowState == null || Objects.equal(currentWorkflowState, workflowState)) {\n                    return@Observer\n                }\n                currentWorkflowState = workflowState\n                Log.d(TAG, \"Current workflow state: ${workflowState.name}\")\n\n                if (PreferenceUtils.isAutoSearchEnabled(this@LiveObjectDetectionActivity)) {\n                    stateChangeInAutoSearchMode(workflowState)\n                } else {\n                    stateChangeInManualSearchMode(workflowState)\n                }\n            })\n\n            // Observes changes on the object to search, if happens, fire product search request.\n            objectToSearch.observe(this@LiveObjectDetectionActivity, Observer { detectObject ->\n                searchEngine!!.search(detectObject) { detectedObject, products ->\n                    workflowModel?.onSearchCompleted(detectedObject, products)\n                }\n            })\n\n            // Observes changes on the object that has search completed, if happens, show the bottom sheet\n            // to present search result.\n            searchedObject.observe(this@LiveObjectDetectionActivity, Observer { nullableSearchedObject ->\n                val searchedObject = nullableSearchedObject ?: return@Observer\n                val productList = searchedObject.productList\n                objectThumbnailForBottomSheet = searchedObject.getObjectThumbnail()\n                bottomSheetTitleView?.text = resources\n                    .getQuantityString(\n                        R.plurals.bottom_sheet_title, productList.size, productList.size\n                    )\n                productRecyclerView?.adapter = ProductAdapter(productList)\n                slidingSheetUpFromHiddenState = true\n                bottomSheetBehavior?.peekHeight =\n                    preview?.height?.div(2) ?: BottomSheetBehavior.PEEK_HEIGHT_AUTO\n                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED\n            })\n        }\n    }\n\n    private fun stateChangeInAutoSearchMode(workflowState: WorkflowState) {\n        val wasPromptChipGone = promptChip!!.visibility == View.GONE\n\n        searchButton?.visibility = View.GONE\n        searchProgressBar?.visibility = View.GONE\n        when (workflowState) {\n            WorkflowState.DETECTING, WorkflowState.DETECTED, WorkflowState.CONFIRMING -> {\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(\n                    if (workflowState == WorkflowState.CONFIRMING)\n                        R.string.prompt_hold_camera_steady\n                    else\n                        R.string.prompt_point_at_an_object\n                )\n                startCameraPreview()\n            }\n            WorkflowState.CONFIRMED -> {\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(R.string.prompt_searching)\n                stopCameraPreview()\n            }\n            WorkflowState.SEARCHING -> {\n                searchProgressBar?.visibility = View.VISIBLE\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(R.string.prompt_searching)\n                stopCameraPreview()\n            }\n            WorkflowState.SEARCHED -> {\n                promptChip?.visibility = View.GONE\n                stopCameraPreview()\n            }\n            else -> promptChip?.visibility = View.GONE\n        }\n\n        val shouldPlayPromptChipEnteringAnimation = wasPromptChipGone && promptChip?.visibility == View.VISIBLE\n        if (shouldPlayPromptChipEnteringAnimation && promptChipAnimator?.isRunning == false) {\n            promptChipAnimator?.start()\n        }\n    }\n\n    private fun stateChangeInManualSearchMode(workflowState: WorkflowState) {\n        val wasPromptChipGone = promptChip?.visibility == View.GONE\n        val wasSearchButtonGone = searchButton?.visibility == View.GONE\n\n        searchProgressBar?.visibility = View.GONE\n        when (workflowState) {\n            WorkflowState.DETECTING, WorkflowState.DETECTED, WorkflowState.CONFIRMING -> {\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(R.string.prompt_point_at_an_object)\n                searchButton?.visibility = View.GONE\n                startCameraPreview()\n            }\n            WorkflowState.CONFIRMED -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.VISIBLE\n                searchButton?.isEnabled = true\n                searchButton?.setBackgroundColor(Color.WHITE)\n                startCameraPreview()\n            }\n            WorkflowState.SEARCHING -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.VISIBLE\n                searchButton?.isEnabled = false\n                searchButton?.setBackgroundColor(Color.GRAY)\n                searchProgressBar!!.visibility = View.VISIBLE\n                stopCameraPreview()\n            }\n            WorkflowState.SEARCHED -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.GONE\n                stopCameraPreview()\n            }\n            else -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.GONE\n            }\n        }\n\n        val shouldPlayPromptChipEnteringAnimation = wasPromptChipGone && promptChip?.visibility == View.VISIBLE\n        promptChipAnimator?.let {\n            if (shouldPlayPromptChipEnteringAnimation && !it.isRunning) it.start()\n        }\n\n        val shouldPlaySearchButtonEnteringAnimation = wasSearchButtonGone && searchButton?.visibility == View.VISIBLE\n        searchButtonAnimator?.let {\n            if (shouldPlaySearchButtonEnteringAnimation && !it.isRunning) it.start()\n        }\n    }\n\n    companion object {\n        private const val TAG = \"LiveObjectActivity\"\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/google/mlkit/md/LiveObjectDetectionActivity.kt	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/java/com/google/mlkit/md/LiveObjectDetectionActivity.kt	(date 1607487387000)
+@@ -46,7 +46,7 @@
+ import com.google.mlkit.md.objectdetection.MultiObjectProcessor
+ import com.google.mlkit.md.objectdetection.ProminentObjectProcessor
+ import com.google.mlkit.md.productsearch.BottomSheetScrimView
+-import com.google.mlkit.md.productsearch.ProductAdapter
++import com.google.mlkit.md.productsearch.RecommendationsAdapter
+ import com.google.mlkit.md.productsearch.SearchEngine
+ import com.google.mlkit.md.settings.PreferenceUtils
+ import com.google.mlkit.md.settings.SettingsActivity
+@@ -61,7 +61,9 @@
+     private var settingsButton: View? = null
+     private var flashButton: View? = null
+     private var promptChip: Chip? = null
++    private var recommendationChip: Chip? = null
+     private var promptChipAnimator: AnimatorSet? = null
++    private var recommendationChipAnimator: AnimatorSet? = null
+     private var searchButton: ExtendedFloatingActionButton? = null
+     private var searchButtonAnimator: AnimatorSet? = null
+     private var searchProgressBar: ProgressBar? = null
+@@ -92,6 +94,11 @@
+             (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {
+                 setTarget(promptChip)
+             }
++        recommendationChip = findViewById(R.id.top_prompt_chip)
++        recommendationChipAnimator =
++            (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {
++                setTarget(recommendationChip)
++            }
+         searchButton = findViewById<ExtendedFloatingActionButton>(R.id.product_search_button).apply {
+             setOnClickListener(this@LiveObjectDetectionActivity)
+         }
+@@ -250,7 +257,7 @@
+         productRecyclerView = findViewById<RecyclerView>(R.id.product_recycler_view).apply {
+             setHasFixedSize(true)
+             layoutManager = LinearLayoutManager(this@LiveObjectDetectionActivity)
+-            adapter = ProductAdapter(ImmutableList.of())
++            adapter = RecommendationsAdapter(ImmutableList.of())
+         }
+     }
+ 
+@@ -286,11 +293,9 @@
+                 val searchedObject = nullableSearchedObject ?: return@Observer
+                 val productList = searchedObject.productList
+                 objectThumbnailForBottomSheet = searchedObject.getObjectThumbnail()
+-                bottomSheetTitleView?.text = resources
+-                    .getQuantityString(
+-                        R.plurals.bottom_sheet_title, productList.size, productList.size
+-                    )
+-                productRecyclerView?.adapter = ProductAdapter(productList)
++                bottomSheetTitleView?.text = resources.getString(R.string.recommendation_bottom_sheet_title)
++                var recommendations = listOf<String>("hello", "world")
++                productRecyclerView?.adapter = RecommendationsAdapter(recommendations)
+                 slidingSheetUpFromHiddenState = true
+                 bottomSheetBehavior?.peekHeight =
+                     preview?.height?.div(2) ?: BottomSheetBehavior.PEEK_HEIGHT_AUTO
+@@ -301,6 +306,7 @@
+ 
+     private fun stateChangeInAutoSearchMode(workflowState: WorkflowState) {
+         val wasPromptChipGone = promptChip!!.visibility == View.GONE
++        val wasRecommendationChipGone = recommendationChip!!.visibility == View.GONE
+ 
+         searchButton?.visibility = View.GONE
+         searchProgressBar?.visibility = View.GONE
+@@ -308,39 +314,52 @@
+             WorkflowState.DETECTING, WorkflowState.DETECTED, WorkflowState.CONFIRMING -> {
+                 promptChip?.visibility = View.VISIBLE
+                 promptChip?.setText(
+-                    if (workflowState == WorkflowState.CONFIRMING)
+-                        R.string.prompt_hold_camera_steady
+-                    else
+-                        R.string.prompt_point_at_an_object
++                        if (workflowState == WorkflowState.CONFIRMING)
++                            R.string.prompt_hold_camera_steady
++                        else
++                            R.string.prompt_point_at_an_object
+                 )
++                recommendationChip?.visibility = View.VISIBLE
++                recommendationChip?.setText("Recommendations: Remove clutter from background")
+                 startCameraPreview()
+             }
+             WorkflowState.CONFIRMED -> {
+                 promptChip?.visibility = View.VISIBLE
+                 promptChip?.setText(R.string.prompt_searching)
++                recommendationChip?.visibility = View.GONE
+                 stopCameraPreview()
+             }
+             WorkflowState.SEARCHING -> {
+                 searchProgressBar?.visibility = View.VISIBLE
+                 promptChip?.visibility = View.VISIBLE
+                 promptChip?.setText(R.string.prompt_searching)
++                recommendationChip?.visibility = View.GONE
+                 stopCameraPreview()
+             }
+             WorkflowState.SEARCHED -> {
+                 promptChip?.visibility = View.GONE
++                recommendationChip?.visibility = View.GONE
+                 stopCameraPreview()
+             }
+-            else -> promptChip?.visibility = View.GONE
++            else -> {
++                promptChip?.visibility = View.GONE
++                recommendationChip?.visibility = View.GONE
++            }
+         }
+ 
+         val shouldPlayPromptChipEnteringAnimation = wasPromptChipGone && promptChip?.visibility == View.VISIBLE
+         if (shouldPlayPromptChipEnteringAnimation && promptChipAnimator?.isRunning == false) {
+             promptChipAnimator?.start()
+         }
++        val shouldPlayRecommendationChipEnteringAnimation = wasRecommendationChipGone && recommendationChip?.visibility == View.VISIBLE
++        if (shouldPlayRecommendationChipEnteringAnimation && recommendationChipAnimator?.isRunning == false) {
++            recommendationChipAnimator?.start()
++        }
+     }
+ 
+     private fun stateChangeInManualSearchMode(workflowState: WorkflowState) {
+         val wasPromptChipGone = promptChip?.visibility == View.GONE
++        val wasRecommendationChipGone = recommendationChip!!.visibility == View.GONE
+         val wasSearchButtonGone = searchButton?.visibility == View.GONE
+ 
+         searchProgressBar?.visibility = View.GONE
+@@ -348,11 +367,14 @@
+             WorkflowState.DETECTING, WorkflowState.DETECTED, WorkflowState.CONFIRMING -> {
+                 promptChip?.visibility = View.VISIBLE
+                 promptChip?.setText(R.string.prompt_point_at_an_object)
++                recommendationChip?.visibility = View.VISIBLE
++                recommendationChip?.setText("Remove clutter from background")
+                 searchButton?.visibility = View.GONE
+                 startCameraPreview()
+             }
+             WorkflowState.CONFIRMED -> {
+                 promptChip?.visibility = View.GONE
++                recommendationChip?.visibility = View.GONE
+                 searchButton?.visibility = View.VISIBLE
+                 searchButton?.isEnabled = true
+                 searchButton?.setBackgroundColor(Color.WHITE)
+@@ -360,6 +382,7 @@
+             }
+             WorkflowState.SEARCHING -> {
+                 promptChip?.visibility = View.GONE
++                recommendationChip?.visibility = View.GONE
+                 searchButton?.visibility = View.VISIBLE
+                 searchButton?.isEnabled = false
+                 searchButton?.setBackgroundColor(Color.GRAY)
+@@ -368,11 +391,13 @@
+             }
+             WorkflowState.SEARCHED -> {
+                 promptChip?.visibility = View.GONE
++                recommendationChip?.visibility = View.GONE
+                 searchButton?.visibility = View.GONE
+                 stopCameraPreview()
+             }
+             else -> {
+                 promptChip?.visibility = View.GONE
++                recommendationChip?.visibility = View.GONE
+                 searchButton?.visibility = View.GONE
+             }
+         }
+@@ -382,6 +407,11 @@
+             if (shouldPlayPromptChipEnteringAnimation && !it.isRunning) it.start()
+         }
+ 
++        val shouldPlayRecommendationChipEnteringAnimation = wasRecommendationChipGone && recommendationChip?.visibility == View.VISIBLE
++        if (shouldPlayRecommendationChipEnteringAnimation && recommendationChipAnimator?.isRunning == false) {
++            recommendationChipAnimator?.start()
++        }
++
+         val shouldPlaySearchButtonEnteringAnimation = wasSearchButtonGone && searchButton?.visibility == View.VISIBLE
+         searchButtonAnimator?.let {
+             if (shouldPlaySearchButtonEnteringAnimation && !it.isRunning) it.start()
+Index: app/src/main/java/com/google/mlkit/md/productsearch/RecommendationsAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/google/mlkit/md/productsearch/RecommendationsAdapter.kt	(date 1607538127000)
++++ app/src/main/java/com/google/mlkit/md/productsearch/RecommendationsAdapter.kt	(date 1607538127000)
+@@ -0,0 +1,40 @@
++package com.google.mlkit.md.productsearch
++
++import android.text.TextUtils
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import android.widget.ImageView
++import android.widget.TextView
++import androidx.recyclerview.widget.RecyclerView
++import androidx.recyclerview.widget.RecyclerView.Adapter
++import com.google.mlkit.md.R
++import com.google.mlkit.md.productsearch.RecommendationsAdapter.RecommendationsHolder
++
++/** Presents the list of product items from cloud product search.  */
++class RecommendationsAdapter(private val recommendationsList: List<String>) : Adapter<RecommendationsHolder>() {
++
++    class RecommendationsHolder private constructor(view: View) : RecyclerView.ViewHolder(view) {
++
++
++        private val recommendation: TextView = view.findViewById(R.id.recommendation)
++
++        fun bindRecommendation(attribute: String) {
++            recommendation.text = attribute + "Remove clutter from background"
++        }
++
++        companion object {
++            fun create(parent: ViewGroup) =
++                    RecommendationsHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false))
++        }
++    }
++
++    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendationsHolder =
++            RecommendationsHolder.create(parent)
++
++    override fun onBindViewHolder(holder: RecommendationsHolder, position: Int) {
++        holder.bindRecommendation(recommendationsList[position])
++    }
++
++    override fun getItemCount(): Int = recommendationsList.size
++}
+Index: app/src/main/java/com/google/mlkit/md/CustomModelObjectDetectionActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.google.mlkit.md\n\n/*\n * Copyright 2020 Google LLC\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *     https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n\nimport android.animation.AnimatorInflater\nimport android.animation.AnimatorSet\nimport android.content.Intent\nimport android.graphics.Bitmap\nimport android.graphics.Color\nimport android.hardware.Camera\nimport android.os.Bundle\nimport android.util.Log\nimport android.view.View\nimport android.view.View.OnClickListener\nimport android.widget.TextView\nimport androidx.appcompat.app.AppCompatActivity\nimport androidx.lifecycle.Observer\nimport androidx.lifecycle.ViewModelProviders\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport com.google.android.material.bottomsheet.BottomSheetBehavior\nimport com.google.android.material.chip.Chip\nimport com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton\nimport com.google.common.base.Objects\nimport com.google.common.collect.ImmutableList\nimport com.google.mlkit.md.camera.GraphicOverlay\nimport com.google.mlkit.md.camera.WorkflowModel\nimport com.google.mlkit.md.camera.WorkflowModel.WorkflowState\nimport com.google.mlkit.md.camera.CameraSource\nimport com.google.mlkit.md.camera.CameraSourcePreview\nimport com.google.mlkit.md.objectdetection.MultiObjectProcessor\nimport com.google.mlkit.md.objectdetection.ProminentObjectProcessor\nimport com.google.mlkit.md.productsearch.BottomSheetScrimView\nimport com.google.mlkit.md.productsearch.Product\nimport com.google.mlkit.md.productsearch.ProductAdapter\nimport com.google.mlkit.md.settings.PreferenceUtils\nimport com.google.mlkit.md.settings.SettingsActivity\nimport java.io.IOException\n\n/** Demonstrates the object detection and custom classification workflow using camera preview.\n *  Modeled after LiveObjectDetectionActivity.java */\nclass CustomModelObjectDetectionActivity : AppCompatActivity(), OnClickListener {\n\n    private var cameraSource: CameraSource? = null\n    private var preview: CameraSourcePreview? = null\n    private var graphicOverlay: GraphicOverlay? = null\n    private var settingsButton: View? = null\n    private var flashButton: View? = null\n    private var promptChip: Chip? = null\n    private var promptChipAnimator: AnimatorSet? = null\n    private var searchButton: ExtendedFloatingActionButton? = null\n    private var searchButtonAnimator: AnimatorSet? = null\n    private var workflowModel: WorkflowModel? = null\n    private var currentWorkflowState: WorkflowState? = null\n\n    private var bottomSheetBehavior: BottomSheetBehavior<View>? = null\n    private var bottomSheetScrimView: BottomSheetScrimView? = null\n    private var productRecyclerView: RecyclerView? = null\n    private var bottomSheetTitleView: TextView? = null\n    private var objectThumbnailForBottomSheet: Bitmap? = null\n    private var slidingSheetUpFromHiddenState: Boolean = false\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n\n        setContentView(R.layout.activity_live_object)\n        preview = findViewById(R.id.camera_preview)\n        graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {\n            setOnClickListener(this@CustomModelObjectDetectionActivity)\n            cameraSource = CameraSource(this)\n        }\n        promptChip = findViewById(R.id.bottom_prompt_chip)\n        promptChipAnimator =\n            (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {\n                setTarget(promptChip)\n            }\n        searchButton = findViewById<ExtendedFloatingActionButton>(R.id.product_search_button).apply {\n            setOnClickListener(this@CustomModelObjectDetectionActivity)\n        }\n        searchButtonAnimator =\n            (AnimatorInflater.loadAnimator(this, R.animator.search_button_enter) as AnimatorSet).apply {\n                setTarget(searchButton)\n            }\n        setUpBottomSheet()\n        findViewById<View>(R.id.close_button).setOnClickListener(this)\n        flashButton = findViewById<View>(R.id.flash_button).apply {\n            setOnClickListener(this@CustomModelObjectDetectionActivity)\n        }\n        settingsButton = findViewById<View>(R.id.settings_button).apply {\n            setOnClickListener(this@CustomModelObjectDetectionActivity)\n        }\n        setUpWorkflowModel()\n    }\n\n    override fun onResume() {\n        super.onResume()\n\n        workflowModel?.markCameraFrozen()\n        settingsButton?.isEnabled = true\n        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN\n        currentWorkflowState = WorkflowState.NOT_STARTED\n        cameraSource?.setFrameProcessor(\n            if (PreferenceUtils.isMultipleObjectsMode(this)) {\n                MultiObjectProcessor(\n                    graphicOverlay!!, workflowModel!!,\n                    CUSTOM_MODEL_PATH\n                )\n            } else {\n                ProminentObjectProcessor(\n                    graphicOverlay!!, workflowModel!!,\n                    CUSTOM_MODEL_PATH\n                )\n            }\n        )\n        workflowModel?.setWorkflowState(WorkflowState.DETECTING)\n    }\n\n    override fun onPause() {\n        super.onPause()\n        currentWorkflowState = WorkflowState.NOT_STARTED\n        stopCameraPreview()\n    }\n\n    override fun onDestroy() {\n        super.onDestroy()\n        cameraSource?.release()\n        cameraSource = null\n    }\n\n    override fun onBackPressed() {\n        if (bottomSheetBehavior?.state != BottomSheetBehavior.STATE_HIDDEN) {\n            bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)\n        } else {\n            super.onBackPressed()\n        }\n    }\n\n    override fun onClick(view: View) {\n        when (view.id) {\n            R.id.product_search_button -> {\n                searchButton?.isEnabled = false\n                workflowModel?.onSearchButtonClicked()\n            }\n            R.id.bottom_sheet_scrim_view -> bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)\n            R.id.close_button -> onBackPressed()\n            R.id.flash_button -> {\n                if (flashButton?.isSelected == true) {\n                    flashButton?.isSelected = false\n                    cameraSource?.updateFlashMode(Camera.Parameters.FLASH_MODE_OFF)\n                } else {\n                    flashButton?.isSelected = true\n                    cameraSource?.updateFlashMode(Camera.Parameters.FLASH_MODE_TORCH)\n                }\n            }\n            R.id.settings_button -> {\n                settingsButton?.isEnabled = false\n                startActivity(Intent(this, SettingsActivity::class.java))\n            }\n        }\n    }\n\n    private fun startCameraPreview() {\n        val cameraSource = this.cameraSource ?: return\n        val workflowModel = this.workflowModel ?: return\n        if (!workflowModel.isCameraLive) {\n            try {\n                workflowModel.markCameraLive()\n                preview?.start(cameraSource)\n            } catch (e: IOException) {\n                Log.e(TAG, \"Failed to start camera preview!\", e)\n                cameraSource.release()\n                this.cameraSource = null\n            }\n        }\n    }\n\n    private fun stopCameraPreview() {\n        if (workflowModel?.isCameraLive == true) {\n            workflowModel!!.markCameraFrozen()\n            flashButton?.isSelected = false\n            preview?.stop()\n        }\n    }\n\n    private fun setUpBottomSheet() {\n        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet))\n        bottomSheetBehavior?.setBottomSheetCallback(\n            object : BottomSheetBehavior.BottomSheetCallback() {\n                override fun onStateChanged(bottomSheet: View, newState: Int) {\n                    Log.d(TAG, \"Bottom sheet new state: $newState\")\n                    bottomSheetScrimView?.visibility =\n                        if (newState == BottomSheetBehavior.STATE_HIDDEN) View.GONE else View.VISIBLE\n                    graphicOverlay?.clear()\n\n                    when (newState) {\n                        BottomSheetBehavior.STATE_HIDDEN -> workflowModel?.setWorkflowState(WorkflowState.DETECTING)\n                        BottomSheetBehavior.STATE_COLLAPSED,\n                        BottomSheetBehavior.STATE_EXPANDED,\n                        BottomSheetBehavior.STATE_HALF_EXPANDED -> slidingSheetUpFromHiddenState = false\n                        BottomSheetBehavior.STATE_DRAGGING, BottomSheetBehavior.STATE_SETTLING -> {\n                        }\n                    }\n                }\n\n                override fun onSlide(bottomSheet: View, slideOffset: Float) {\n                    val searchedObject = workflowModel!!.searchedObject.value\n                    if (searchedObject == null || java.lang.Float.isNaN(slideOffset)) {\n                        return\n                    }\n\n                    val graphicOverlay = graphicOverlay ?: return\n                    val bottomSheetBehavior = bottomSheetBehavior ?: return\n                    val collapsedStateHeight = bottomSheetBehavior.peekHeight.coerceAtMost(bottomSheet.height)\n                    val bottomBitmap = objectThumbnailForBottomSheet ?: return\n                    if (slidingSheetUpFromHiddenState) {\n                        val thumbnailSrcRect = graphicOverlay.translateRect(searchedObject.boundingBox)\n                        bottomSheetScrimView?.updateWithThumbnailTranslateAndScale(\n                            bottomBitmap,\n                            collapsedStateHeight,\n                            slideOffset,\n                            thumbnailSrcRect\n                        )\n                    } else {\n                        bottomSheetScrimView?.updateWithThumbnailTranslate(\n                            bottomBitmap, collapsedStateHeight, slideOffset, bottomSheet\n                        )\n                    }\n                }\n            })\n\n        bottomSheetScrimView = findViewById<BottomSheetScrimView>(R.id.bottom_sheet_scrim_view).apply {\n            setOnClickListener(this@CustomModelObjectDetectionActivity)\n        }\n\n        bottomSheetTitleView = findViewById(R.id.bottom_sheet_title)\n        productRecyclerView = findViewById<RecyclerView>(R.id.product_recycler_view).apply {\n            setHasFixedSize(true)\n            layoutManager = LinearLayoutManager(this@CustomModelObjectDetectionActivity)\n            adapter = ProductAdapter(ImmutableList.of())\n        }\n    }\n\n    private fun setUpWorkflowModel() {\n        workflowModel = ViewModelProviders.of(this).get(WorkflowModel::class.java).apply {\n\n            // Observes the workflow state changes, if happens, update the overlay view indicators and\n            // camera preview state.\n            workflowState.observe(this@CustomModelObjectDetectionActivity, Observer { workflowState ->\n                if (workflowState == null || Objects.equal(currentWorkflowState, workflowState)) {\n                    return@Observer\n                }\n                currentWorkflowState = workflowState\n                Log.d(TAG, \"Current workflow state: ${workflowState.name}\")\n\n                if (PreferenceUtils.isAutoSearchEnabled(this@CustomModelObjectDetectionActivity)) {\n                    stateChangeInAutoSearchMode(workflowState)\n                } else {\n                    stateChangeInManualSearchMode(workflowState)\n                }\n            })\n\n            // Observes changes on the object to search, if happens, show detected object labels as\n            // product search results.\n            objectToSearch.observe(this@CustomModelObjectDetectionActivity, Observer { detectObject ->\n                val productList: List<Product> = detectObject.labels.map { label ->\n                    Product(\"\" /* imageUrl */, label.text, \"\" /* subtitle */)\n                }\n                workflowModel?.onSearchCompleted(detectObject, productList)\n            })\n\n            // Observes changes on the object that has search completed, if happens, show the bottom sheet\n            // to present search result.\n            searchedObject.observe(this@CustomModelObjectDetectionActivity, Observer { searchedObject ->\n                objectThumbnailForBottomSheet = searchedObject.getObjectThumbnail()\n                bottomSheetTitleView?.text = getString(R.string.buttom_sheet_custom_model_title)\n                productRecyclerView?.adapter = ProductAdapter(searchedObject.productList)\n                slidingSheetUpFromHiddenState = true\n                bottomSheetBehavior?.peekHeight =\n                    preview?.height?.div(2) ?: BottomSheetBehavior.PEEK_HEIGHT_AUTO\n                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED\n            })\n        }\n    }\n\n    private fun stateChangeInAutoSearchMode(workflowState: WorkflowState) {\n        val wasPromptChipGone = promptChip!!.visibility == View.GONE\n\n        searchButton?.visibility = View.GONE\n        when (workflowState) {\n            WorkflowState.DETECTING, WorkflowState.DETECTED, WorkflowState.CONFIRMING -> {\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(\n                    if (workflowState == WorkflowState.CONFIRMING)\n                        R.string.prompt_hold_camera_steady\n                    else\n                        R.string.prompt_point_at_a_bird\n                )\n                startCameraPreview()\n            }\n            WorkflowState.CONFIRMED -> {\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(R.string.prompt_searching)\n                stopCameraPreview()\n            }\n            WorkflowState.SEARCHING -> {\n                promptChip?.visibility = View.GONE\n                stopCameraPreview()\n            }\n            WorkflowState.SEARCHED -> {\n                stopCameraPreview()\n            }\n            else -> promptChip?.visibility = View.GONE\n        }\n\n        val shouldPlayPromptChipEnteringAnimation = wasPromptChipGone && promptChip?.visibility == View.VISIBLE\n        if (shouldPlayPromptChipEnteringAnimation && promptChipAnimator?.isRunning == false) {\n            promptChipAnimator?.start()\n        }\n    }\n\n    private fun stateChangeInManualSearchMode(workflowState: WorkflowState) {\n        val wasPromptChipGone = promptChip?.visibility == View.GONE\n        val wasSearchButtonGone = searchButton?.visibility == View.GONE\n\n        when (workflowState) {\n            WorkflowState.DETECTING, WorkflowState.DETECTED, WorkflowState.CONFIRMING -> {\n                promptChip?.visibility = View.VISIBLE\n                promptChip?.setText(R.string.prompt_point_at_an_object)\n                searchButton?.visibility = View.GONE\n                startCameraPreview()\n            }\n            WorkflowState.CONFIRMED -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.VISIBLE\n                searchButton?.isEnabled = true\n                searchButton?.setBackgroundColor(Color.WHITE)\n                startCameraPreview()\n            }\n            WorkflowState.SEARCHING -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.VISIBLE\n                searchButton?.isEnabled = false\n                searchButton?.setBackgroundColor(Color.GRAY)\n                stopCameraPreview()\n            }\n            WorkflowState.SEARCHED -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.GONE\n                stopCameraPreview()\n            }\n            else -> {\n                promptChip?.visibility = View.GONE\n                searchButton?.visibility = View.GONE\n            }\n        }\n\n        val shouldPlayPromptChipEnteringAnimation = wasPromptChipGone && promptChip?.visibility == View.VISIBLE\n        promptChipAnimator?.let {\n            if (shouldPlayPromptChipEnteringAnimation && !it.isRunning) it.start()\n        }\n\n        val shouldPlaySearchButtonEnteringAnimation = wasSearchButtonGone && searchButton?.visibility == View.VISIBLE\n        searchButtonAnimator?.let {\n            if (shouldPlaySearchButtonEnteringAnimation && !it.isRunning) it.start()\n        }\n    }\n\n    companion object {\n        private const val TAG = \"CustomModelODActivity\"\n        private const val CUSTOM_MODEL_PATH = \"custom_models/bird_classifier.tflite\"\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/google/mlkit/md/CustomModelObjectDetectionActivity.kt	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/java/com/google/mlkit/md/CustomModelObjectDetectionActivity.kt	(date 1607417142000)
+@@ -276,21 +276,24 @@
+             // Observes changes on the object to search, if happens, show detected object labels as
+             // product search results.
+             objectToSearch.observe(this@CustomModelObjectDetectionActivity, Observer { detectObject ->
+-                val productList: List<Product> = detectObject.labels.map { label ->
+-                    Product("" /* imageUrl */, label.text, "" /* subtitle */)
+-                }
+-                workflowModel?.onSearchCompleted(detectObject, productList)
++//                bottomSheetTitleView?.text = resources.getString(R.string.recommendation_bottom_sheet_title)
++//                slidingSheetUpFromHiddenState = true
++//                bottomSheetBehavior?.peekHeight =
++//                        preview?.height?.div(2) ?: BottomSheetBehavior.PEEK_HEIGHT_AUTO
++//                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+             })
+ 
+             // Observes changes on the object that has search completed, if happens, show the bottom sheet
+             // to present search result.
+-            searchedObject.observe(this@CustomModelObjectDetectionActivity, Observer { searchedObject ->
++            searchedObject.observe(this@CustomModelObjectDetectionActivity, Observer { nullableSearchedObject ->
++                val searchedObject = nullableSearchedObject ?: return@Observer
++                val productList = searchedObject.productList
+                 objectThumbnailForBottomSheet = searchedObject.getObjectThumbnail()
+-                bottomSheetTitleView?.text = getString(R.string.buttom_sheet_custom_model_title)
+-                productRecyclerView?.adapter = ProductAdapter(searchedObject.productList)
++                bottomSheetTitleView?.text = resources.getString(R.string.effect_bottom_sheet_title)
++                productRecyclerView?.adapter = ProductAdapter(productList)
+                 slidingSheetUpFromHiddenState = true
+                 bottomSheetBehavior?.peekHeight =
+-                    preview?.height?.div(2) ?: BottomSheetBehavior.PEEK_HEIGHT_AUTO
++                        preview?.height?.div(2) ?: BottomSheetBehavior.PEEK_HEIGHT_AUTO
+                 bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+             })
+         }
+Index: app/src/main/res/layout/products_preview_card.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<com.google.android.material.card.MaterialCardView\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    style=\"@style/Widget.MaterialComponents.CardView\"\n    android:layout_width=\"@dimen/preview_card_width\"\n    android:layout_height=\"@dimen/preview_card_height\"\n    app:cardBackgroundColor=\"@color/white\"\n    app:cardCornerRadius=\"@dimen/preview_card_corner_radius\">\n\n  <LinearLayout\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"match_parent\"\n      android:orientation=\"horizontal\">\n\n    <ImageView\n        android:id=\"@+id/card_image\"\n        android:layout_width=\"@dimen/preview_card_image_size\"\n        android:layout_height=\"@dimen/preview_card_image_size\"\n        android:layout_margin=\"@dimen/preview_card_image_margin\"\n        android:contentDescription=\"@null\"/>\n\n    <LinearLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        android:orientation=\"vertical\">\n\n      <TextView\n          android:id=\"@+id/card_title\"\n          android:layout_width=\"wrap_content\"\n          android:layout_height=\"wrap_content\"\n          android:paddingTop=\"@dimen/preview_card_title_padding_top\"\n          android:fontFamily=\"sans-serif-medium\"\n          android:maxLines=\"2\"\n          android:textColor=\"@color/black\"\n          android:textSize=\"@dimen/preview_card_title_text_size\"/>\n\n      <TextView\n          android:id=\"@+id/card_subtitle\"\n          android:layout_width=\"wrap_content\"\n          android:layout_height=\"wrap_content\"\n          android:paddingTop=\"@dimen/preview_card_subtitle_padding_top\"\n          android:fontFamily=\"sans-serif\"\n          android:maxLines=\"2\"\n          android:textColor=\"@color/dark\"\n          android:textSize=\"@dimen/preview_card_subtitle_text_size\"/>\n\n    </LinearLayout>\n\n  </LinearLayout>\n\n</com.google.android.material.card.MaterialCardView>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/products_preview_card.xml	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/res/layout/products_preview_card.xml	(date 1607488445000)
+@@ -29,21 +29,21 @@
+           android:id="@+id/card_title"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+-          android:paddingTop="@dimen/preview_card_title_padding_top"
+           android:fontFamily="sans-serif-medium"
+           android:maxLines="2"
++          android:paddingTop="@dimen/preview_card_title_padding_top"
+           android:textColor="@color/black"
+-          android:textSize="@dimen/preview_card_title_text_size"/>
++          android:textSize="@dimen/preview_card_title_text_size" />
+ 
+       <TextView
+           android:id="@+id/card_subtitle"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+-          android:paddingTop="@dimen/preview_card_subtitle_padding_top"
+           android:fontFamily="sans-serif"
+           android:maxLines="2"
++          android:paddingTop="@dimen/preview_card_subtitle_padding_top"
+           android:textColor="@color/dark"
+-          android:textSize="@dimen/preview_card_subtitle_text_size"/>
++          android:textSize="@dimen/preview_card_subtitle_text_size" />
+ 
+     </LinearLayout>
+ 
+Index: app/src/main/java/com/google/mlkit/md/StaticObjectDetectionActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n * Copyright 2020 Google LLC\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *     https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n\npackage com.google.mlkit.md\n\nimport android.animation.AnimatorInflater\nimport android.animation.AnimatorSet\nimport android.app.Activity\nimport android.content.Intent\nimport android.content.res.Resources\nimport android.graphics.Bitmap\nimport android.graphics.PointF\nimport android.graphics.Rect\nimport android.graphics.RectF\nimport android.net.Uri\nimport android.os.Bundle\nimport android.util.Log\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.FrameLayout\nimport android.widget.ImageView\nimport android.widget.TextView\nimport androidx.annotation.MainThread\nimport androidx.appcompat.app.AppCompatActivity\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport com.google.android.material.bottomsheet.BottomSheetBehavior\nimport com.google.android.material.chip.Chip\nimport com.google.common.collect.ImmutableList\nimport com.google.mlkit.md.productsearch.BottomSheetScrimView\nimport com.google.mlkit.md.objectdetection.DetectedObjectInfo\nimport com.google.mlkit.md.objectdetection.StaticObjectDotView\nimport com.google.mlkit.md.productsearch.PreviewCardAdapter\nimport com.google.mlkit.md.productsearch.Product\nimport com.google.mlkit.md.productsearch.ProductAdapter\nimport com.google.mlkit.md.productsearch.SearchEngine\nimport com.google.mlkit.md.productsearch.SearchedObject\nimport com.google.mlkit.vision.common.InputImage\nimport com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions\nimport com.google.mlkit.vision.objects.DetectedObject\nimport com.google.mlkit.vision.objects.ObjectDetection\nimport com.google.mlkit.vision.objects.ObjectDetector\nimport java.io.IOException\nimport java.lang.NullPointerException\nimport java.util.TreeMap\n\n/** Demonstrates the object detection and visual search workflow using static image.  */\nclass StaticObjectDetectionActivity : AppCompatActivity(), View.OnClickListener {\n\n    private val searchedObjectMap = TreeMap<Int, SearchedObject>()\n\n    private var loadingView: View? = null\n    private var bottomPromptChip: Chip? = null\n    private var inputImageView: ImageView? = null\n    private var previewCardCarousel: RecyclerView? = null\n    private var dotViewContainer: ViewGroup? = null\n\n    private var bottomSheetBehavior: BottomSheetBehavior<View>? = null\n    private var bottomSheetScrimView: BottomSheetScrimView? = null\n    private var bottomSheetTitleView: TextView? = null\n    private var productRecyclerView: RecyclerView? = null\n\n    private var inputBitmap: Bitmap? = null\n    private var searchedObjectForBottomSheet: SearchedObject? = null\n    private var dotViewSize: Int = 0\n    private var detectedObjectNum = 0\n    private var currentSelectedObjectIndex = 0\n\n    private var detector: ObjectDetector? = null\n    private var searchEngine: SearchEngine? = null\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n\n        searchEngine = SearchEngine(applicationContext)\n\n        setContentView(R.layout.activity_static_object)\n\n        loadingView = findViewById<View>(R.id.loading_view).apply {\n            setOnClickListener(this@StaticObjectDetectionActivity)\n        }\n\n        bottomPromptChip = findViewById(R.id.bottom_prompt_chip)\n        inputImageView = findViewById(R.id.input_image_view)\n\n        previewCardCarousel = findViewById<RecyclerView>(R.id.card_recycler_view).apply {\n            setHasFixedSize(true)\n            layoutManager = LinearLayoutManager(this@StaticObjectDetectionActivity, RecyclerView.HORIZONTAL, false)\n            addItemDecoration(\n                CardItemDecoration(\n                    resources\n                )\n            )\n        }\n\n        dotViewContainer = findViewById(R.id.dot_view_container)\n        dotViewSize = resources.getDimensionPixelOffset(R.dimen.static_image_dot_view_size)\n\n        setUpBottomSheet()\n\n        findViewById<View>(R.id.close_button).setOnClickListener(this)\n        findViewById<View>(R.id.photo_library_button).setOnClickListener(this)\n\n        detector = ObjectDetection.getClient(\n            ObjectDetectorOptions.Builder()\n                .setDetectorMode(ObjectDetectorOptions.SINGLE_IMAGE_MODE)\n                .enableMultipleObjects()\n                .build()\n        )\n        intent.data?.let(::detectObjects)\n    }\n\n    override fun onDestroy() {\n        super.onDestroy()\n        try {\n            detector?.close()\n        } catch (e: IOException) {\n            Log.e(TAG, \"Failed to close the detector!\", e)\n        }\n\n        searchEngine?.shutdown()\n    }\n\n    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {\n        if (requestCode == Utils.REQUEST_CODE_PHOTO_LIBRARY && resultCode == Activity.RESULT_OK) {\n            data?.data?.let(::detectObjects)\n        } else {\n            super.onActivityResult(requestCode, resultCode, data)\n        }\n    }\n\n    override fun onBackPressed() {\n        if (bottomSheetBehavior?.state != BottomSheetBehavior.STATE_HIDDEN) {\n            bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)\n        } else {\n            super.onBackPressed()\n        }\n    }\n\n    override fun onClick(view: View) {\n        when (view.id) {\n            R.id.close_button -> onBackPressed()\n            R.id.photo_library_button -> Utils.openImagePicker(this)\n            R.id.bottom_sheet_scrim_view -> bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN\n        }\n    }\n\n    private fun showSearchResults(searchedObject: SearchedObject) {\n        searchedObjectForBottomSheet = searchedObject\n        val productList = searchedObject.productList\n        bottomSheetTitleView?.text = resources\n            .getQuantityString(\n                R.plurals.bottom_sheet_title, productList.size, productList.size\n            )\n        productRecyclerView?.adapter = ProductAdapter(productList)\n        bottomSheetBehavior?.peekHeight = (inputImageView?.parent as View).height / 2\n        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED\n    }\n\n    private fun setUpBottomSheet() {\n        bottomSheetBehavior = BottomSheetBehavior.from(findViewById<View>(R.id.bottom_sheet)).apply {\n            setBottomSheetCallback(\n                object : BottomSheetBehavior.BottomSheetCallback() {\n                    override fun onStateChanged(bottomSheet: View, newState: Int) {\n                        Log.d(TAG, \"Bottom sheet new state: $newState\")\n                        bottomSheetScrimView?.visibility =\n                            if (newState == BottomSheetBehavior.STATE_HIDDEN) View.GONE else View.VISIBLE\n                    }\n\n                    override fun onSlide(bottomSheet: View, slideOffset: Float) {\n                        if (java.lang.Float.isNaN(slideOffset)) {\n                            return\n                        }\n\n                        val collapsedStateHeight = bottomSheetBehavior!!.peekHeight.coerceAtMost(bottomSheet.height)\n                        val searchedObjectForBottomSheet = searchedObjectForBottomSheet\n                            ?: return\n                        bottomSheetScrimView?.updateWithThumbnailTranslate(\n                            searchedObjectForBottomSheet.getObjectThumbnail(),\n                            collapsedStateHeight,\n                            slideOffset,\n                            bottomSheet\n                        )\n                    }\n                }\n            )\n            state = BottomSheetBehavior.STATE_HIDDEN\n        }\n\n        bottomSheetScrimView = findViewById<BottomSheetScrimView>(R.id.bottom_sheet_scrim_view).apply {\n            setOnClickListener(this@StaticObjectDetectionActivity)\n        }\n\n        bottomSheetTitleView = findViewById(R.id.bottom_sheet_title)\n        productRecyclerView = findViewById<RecyclerView>(R.id.product_recycler_view)?.apply {\n            setHasFixedSize(true)\n            layoutManager = LinearLayoutManager(this@StaticObjectDetectionActivity)\n            adapter = ProductAdapter(ImmutableList.of())\n        }\n    }\n\n    private fun detectObjects(imageUri: Uri) {\n        inputImageView?.setImageDrawable(null)\n        bottomPromptChip?.visibility = View.GONE\n        previewCardCarousel?.adapter = PreviewCardAdapter(ImmutableList.of()) { showSearchResults(it) }\n        previewCardCarousel?.clearOnScrollListeners()\n        dotViewContainer?.removeAllViews()\n        currentSelectedObjectIndex = 0\n\n        try {\n            inputBitmap = Utils.loadImage(\n                this, imageUri,\n                MAX_IMAGE_DIMENSION\n            )\n        } catch (e: IOException) {\n            Log.e(TAG, \"Failed to load file: $imageUri\", e)\n            showBottomPromptChip(\"Failed to load file!\")\n            return\n        }\n\n        inputImageView?.setImageBitmap(inputBitmap)\n        loadingView?.visibility = View.VISIBLE\n        val image = InputImage.fromBitmap(inputBitmap!!, 0)\n        detector?.process(image)\n            ?.addOnSuccessListener { objects -> onObjectsDetected(BitmapInputInfo(inputBitmap!!), objects) }\n            ?.addOnFailureListener { onObjectsDetected(BitmapInputInfo(inputBitmap!!), ImmutableList.of()) }\n    }\n\n    @MainThread\n    private fun onObjectsDetected(image: InputInfo, objects: List<DetectedObject>) {\n        detectedObjectNum = objects.size\n        Log.d(TAG, \"Detected objects num: $detectedObjectNum\")\n        if (detectedObjectNum == 0) {\n            loadingView?.visibility = View.GONE\n            showBottomPromptChip(getString(R.string.static_image_prompt_detected_no_results))\n        } else {\n            searchedObjectMap.clear()\n            for (i in objects.indices) {\n                searchEngine?.search(DetectedObjectInfo(objects[i], i, image)) { detectedObject, products ->\n                    onSearchCompleted(detectedObject, products)\n                }\n            }\n        }\n    }\n\n    private fun onSearchCompleted(detectedObject: DetectedObjectInfo, productList: List<Product>) {\n        Log.d(TAG, \"Search completed for object index: ${detectedObject.objectIndex}\")\n        searchedObjectMap[detectedObject.objectIndex] = SearchedObject(resources, detectedObject, productList)\n        if (searchedObjectMap.size < detectedObjectNum) {\n            // Hold off showing the result until the search of all detected objects completes.\n            return\n        }\n\n        showBottomPromptChip(getString(R.string.static_image_prompt_detected_results))\n        loadingView?.visibility = View.GONE\n        previewCardCarousel?.adapter =\n            PreviewCardAdapter(ImmutableList.copyOf(searchedObjectMap.values)) { showSearchResults(it) }\n        previewCardCarousel?.addOnScrollListener(\n            object : RecyclerView.OnScrollListener() {\n                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {\n                    Log.d(TAG, \"New card scroll state: $newState\")\n                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {\n                        for (i in 0 until recyclerView.childCount) {\n                            val childView = recyclerView.getChildAt(i)\n                            if (childView.x >= 0) {\n                                val cardIndex = recyclerView.getChildAdapterPosition(childView)\n                                if (cardIndex != currentSelectedObjectIndex) {\n                                    selectNewObject(cardIndex)\n                                }\n                                break\n                            }\n                        }\n                    }\n                }\n            })\n\n        for (searchedObject in searchedObjectMap.values) {\n            val dotView = createDotView(searchedObject)\n            dotView.setOnClickListener {\n                if (searchedObject.objectIndex == currentSelectedObjectIndex) {\n                    showSearchResults(searchedObject)\n                } else {\n                    selectNewObject(searchedObject.objectIndex)\n                    showSearchResults(searchedObject)\n                    previewCardCarousel!!.smoothScrollToPosition(searchedObject.objectIndex)\n                }\n            }\n\n            dotViewContainer?.addView(dotView)\n            val animatorSet = AnimatorInflater.loadAnimator(this, R.animator.static_image_dot_enter) as AnimatorSet\n            animatorSet.setTarget(dotView)\n            animatorSet.start()\n        }\n    }\n\n    private fun createDotView(searchedObject: SearchedObject): StaticObjectDotView {\n        val viewCoordinateScale: Float\n        val horizontalGap: Float\n        val verticalGap: Float\n        val inputImageView = inputImageView ?: throw NullPointerException()\n        val inputBitmap = inputBitmap ?: throw NullPointerException()\n        val inputImageViewRatio = inputImageView.width.toFloat() / inputImageView.height\n        val inputBitmapRatio = inputBitmap.width.toFloat() / inputBitmap.height\n        if (inputBitmapRatio <= inputImageViewRatio) { // Image content fills height\n            viewCoordinateScale = inputImageView.height.toFloat() / inputBitmap.height\n            horizontalGap = (inputImageView.width - inputBitmap.width * viewCoordinateScale) / 2\n            verticalGap = 0f\n        } else { // Image content fills width\n            viewCoordinateScale = inputImageView.width.toFloat() / inputBitmap.width\n            horizontalGap = 0f\n            verticalGap = (inputImageView.height - inputBitmap.height * viewCoordinateScale) / 2\n        }\n\n        val boundingBox = searchedObject.boundingBox\n        val boxInViewCoordinate = RectF(\n            boundingBox.left * viewCoordinateScale + horizontalGap,\n            boundingBox.top * viewCoordinateScale + verticalGap,\n            boundingBox.right * viewCoordinateScale + horizontalGap,\n            boundingBox.bottom * viewCoordinateScale + verticalGap\n        )\n        val initialSelected = searchedObject.objectIndex == 0\n        val dotView = StaticObjectDotView(this, initialSelected)\n        val layoutParams = FrameLayout.LayoutParams(dotViewSize, dotViewSize)\n        val dotCenter = PointF(\n            (boxInViewCoordinate.right + boxInViewCoordinate.left) / 2,\n            (boxInViewCoordinate.bottom + boxInViewCoordinate.top) / 2\n        )\n        layoutParams.setMargins(\n            (dotCenter.x - dotViewSize / 2f).toInt(),\n            (dotCenter.y - dotViewSize / 2f).toInt(),\n            0,\n            0\n        )\n        dotView.layoutParams = layoutParams\n        return dotView\n    }\n\n    private fun selectNewObject(objectIndex: Int) {\n        val dotViewToDeselect = dotViewContainer!!.getChildAt(currentSelectedObjectIndex) as StaticObjectDotView\n        dotViewToDeselect.playAnimationWithSelectedState(false)\n\n        currentSelectedObjectIndex = objectIndex\n\n        val selectedDotView = dotViewContainer!!.getChildAt(currentSelectedObjectIndex) as StaticObjectDotView\n        selectedDotView.playAnimationWithSelectedState(true)\n    }\n\n    private fun showBottomPromptChip(message: String) {\n        bottomPromptChip?.visibility = View.VISIBLE\n        bottomPromptChip?.text = message\n    }\n\n    private class CardItemDecoration constructor(resources: Resources) : RecyclerView.ItemDecoration() {\n\n        private val cardSpacing: Int = resources.getDimensionPixelOffset(R.dimen.preview_card_spacing)\n\n        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {\n            val adapterPosition = parent.getChildAdapterPosition(view)\n            outRect.left = if (adapterPosition == 0) cardSpacing * 2 else cardSpacing\n            val adapter = parent.adapter ?: return\n            if (adapterPosition == adapter.itemCount - 1) {\n                outRect.right = cardSpacing\n            }\n        }\n    }\n\n    companion object {\n        private const val TAG = \"StaticObjectActivity\"\n        private const val MAX_IMAGE_DIMENSION = 1024\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/google/mlkit/md/StaticObjectDetectionActivity.kt	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/java/com/google/mlkit/md/StaticObjectDetectionActivity.kt	(date 1607416686000)
+@@ -161,10 +161,7 @@
+     private fun showSearchResults(searchedObject: SearchedObject) {
+         searchedObjectForBottomSheet = searchedObject
+         val productList = searchedObject.productList
+-        bottomSheetTitleView?.text = resources
+-            .getQuantityString(
+-                R.plurals.bottom_sheet_title, productList.size, productList.size
+-            )
++        bottomSheetTitleView?.text = resources.getString(R.string.effect_bottom_sheet_title)
+         productRecyclerView?.adapter = ProductAdapter(productList)
+         bottomSheetBehavior?.peekHeight = (inputImageView?.parent as View).height / 2
+         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+Index: app/src/main/java/com/google/mlkit/md/productsearch/ProductAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n * Copyright 2020 Google LLC\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *     https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n\npackage com.google.mlkit.md.productsearch\n\nimport android.text.TextUtils\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.ImageView\nimport android.widget.TextView\nimport androidx.recyclerview.widget.RecyclerView\nimport androidx.recyclerview.widget.RecyclerView.Adapter\nimport com.google.mlkit.md.R\nimport com.google.mlkit.md.productsearch.ProductAdapter.ProductViewHolder\n\n/** Presents the list of product items from cloud product search.  */\nclass ProductAdapter(private val productList: List<Product>) : Adapter<ProductViewHolder>() {\n\n    class ProductViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view) {\n\n        private val imageView: ImageView = view.findViewById(R.id.product_image)\n        private val titleView: TextView = view.findViewById(R.id.product_title)\n        private val subtitleView: TextView = view.findViewById(R.id.product_subtitle)\n        private val imageSize: Int = view.resources.getDimensionPixelOffset(R.dimen.product_item_image_size)\n\n        fun bindProduct(product: Product) {\n            imageView.setImageDrawable(null)\n            if (!TextUtils.isEmpty(product.imageUrl)) {\n                ImageDownloadTask(imageView, imageSize).execute(product.imageUrl)\n            } else {\n                imageView.setImageResource(R.drawable.logo_google_cloud)\n            }\n            titleView.text = product.title\n            subtitleView.text = product.subtitle\n        }\n\n        companion object {\n            fun create(parent: ViewGroup) =\n                ProductViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false))\n        }\n    }\n\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder =\n        ProductViewHolder.create(parent)\n\n    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {\n        holder.bindProduct(productList[position])\n    }\n\n    override fun getItemCount(): Int = productList.size\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/google/mlkit/md/productsearch/ProductAdapter.kt	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/java/com/google/mlkit/md/productsearch/ProductAdapter.kt	(date 1607485620000)
+@@ -40,7 +40,8 @@
+         fun bindProduct(product: Product) {
+             imageView.setImageDrawable(null)
+             if (!TextUtils.isEmpty(product.imageUrl)) {
+-                ImageDownloadTask(imageView, imageSize).execute(product.imageUrl)
++                // TODO change this to logo
++                imageView.setImageResource(R.drawable.dolly_zoom)
+             } else {
+                 imageView.setImageResource(R.drawable.logo_google_cloud)
+             }
+Index: app/src/main/java/com/google/mlkit/md/productsearch/SearchEngine.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n * Copyright 2020 Google LLC\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *     https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n\npackage com.google.mlkit.md.productsearch\n\nimport android.content.Context\nimport android.util.Log\nimport com.android.volley.RequestQueue\nimport com.android.volley.toolbox.JsonObjectRequest\nimport com.android.volley.toolbox.Volley\nimport com.google.android.gms.tasks.Tasks\nimport com.google.mlkit.md.objectdetection.DetectedObjectInfo\nimport java.util.ArrayList\nimport java.util.concurrent.Callable\nimport java.util.concurrent.ExecutorService\nimport java.util.concurrent.Executors\n\n/** A fake search engine to help simulate the complete work flow.  */\nclass SearchEngine(context: Context) {\n\n    private val searchRequestQueue: RequestQueue = Volley.newRequestQueue(context)\n    private val requestCreationExecutor: ExecutorService = Executors.newSingleThreadExecutor()\n\n    fun search(\n        detectedObject: DetectedObjectInfo,\n        listener: (detectedObject: DetectedObjectInfo, productList: List<Product>) -> Unit\n    ) {\n        // Crops the object image out of the full image is expensive, so do it off the UI thread.\n        Tasks.call<JsonObjectRequest>(requestCreationExecutor, Callable { createRequest(detectedObject) })\n            .addOnSuccessListener { productRequest -> searchRequestQueue.add(productRequest.setTag(TAG)) }\n            .addOnFailureListener { e ->\n                Log.e(TAG, \"Failed to create product search request!\", e)\n                // Remove the below dummy code after your own product search backed hooked up.\n                val productList = ArrayList<Product>()\n                for (i in 0..7) {\n                    productList.add(\n                        Product(/* imageUrl= */\"\", \"Product title $i\", \"Product subtitle $i\")\n                    )\n                }\n                listener.invoke(detectedObject, productList)\n            }\n    }\n\n    fun shutdown() {\n        searchRequestQueue.cancelAll(TAG)\n        requestCreationExecutor.shutdown()\n    }\n\n    companion object {\n        private const val TAG = \"SearchEngine\"\n\n        @Throws(Exception::class)\n        private fun createRequest(searchingObject: DetectedObjectInfo): JsonObjectRequest {\n            val objectImageData = searchingObject.imageData\n                ?: throw Exception(\"Failed to get object image data!\")\n\n            // Hooks up with your own product search backend here.\n            throw Exception(\"Hooks up with your own product search backend.\")\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/google/mlkit/md/productsearch/SearchEngine.kt	(revision 428a1d75b93ee84b1d783ea75059a45514af98a2)
++++ app/src/main/java/com/google/mlkit/md/productsearch/SearchEngine.kt	(date 1607415089000)
+@@ -24,6 +24,7 @@
+ import com.google.android.gms.tasks.Tasks
+ import com.google.mlkit.md.objectdetection.DetectedObjectInfo
+ import java.util.ArrayList
++import com.google.mlkit.md.R
+ import java.util.concurrent.Callable
+ import java.util.concurrent.ExecutorService
+ import java.util.concurrent.Executors
+@@ -33,6 +34,10 @@
+ 
+     private val searchRequestQueue: RequestQueue = Volley.newRequestQueue(context)
+     private val requestCreationExecutor: ExecutorService = Executors.newSingleThreadExecutor()
++    private val effects = mapOf(
++            "Dolly Zoom" to "Zoom into the product while keeping background constant",
++            "Rotate Around" to "Pan across the product"
++    )
+ 
+     fun search(
+         detectedObject: DetectedObjectInfo,
+@@ -44,13 +49,14 @@
+             .addOnFailureListener { e ->
+                 Log.e(TAG, "Failed to create product search request!", e)
+                 // Remove the below dummy code after your own product search backed hooked up.
+-                val productList = ArrayList<Product>()
+-                for (i in 0..7) {
+-                    productList.add(
+-                        Product(/* imageUrl= */"", "Product title $i", "Product subtitle $i")
++                val effectsList = ArrayList<Product>()
++                for ((k, v) in effects) {
++                    val image_url = k.toLowerCase().replace(' ', '_')
++                    effectsList.add(
++                        Product(image_url, k, v)
+                     )
+                 }
+-                listener.invoke(detectedObject, productList)
++                listener.invoke(detectedObject, effectsList)
+             }
+     }
+ 

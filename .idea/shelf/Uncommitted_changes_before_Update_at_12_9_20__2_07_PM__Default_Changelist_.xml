@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_12_9_20,_2_07_PM_[Default_Changelist]" date="1607551669285" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_20,_2_07_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 12/9/20, 2:07 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable/rotate_around.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_20,_2_07_PM_[Default_Changelist]/rotate_around.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable/dolly_zoom.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_20,_2_07_PM_[Default_Changelist]/dolly_zoom.png" />
+  </binary>
+</changelist>
