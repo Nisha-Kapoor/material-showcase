@@ -49,28 +49,59 @@ class SearchEngine(context: Context) {
 
         @Throws(Exception::class)
         private fun getRecommendations(searchingObject: DetectedObjectInfo): List<String> {
-            var recommendation_list = ArrayList<String>()
+            var recommendationList = ArrayList<String>()
             val imageData = searchingObject.getBitmap()
             val objectImageData = searchingObject.getObjectBitmap()
-                ?: throw Exception("Failed to get object image data!")
-            var bg_recommendation = edgeScoreBasedSuggestion(imageData, objectImageData)
-//            var light_recommendation = lightBasedSuggestion(imageData)
-            recommendation_list.add(bg_recommendation)
-//            recommendation_list.add(light_recommendation)
-            return recommendation_list
+
+            var lightRecommendation = lightBasedSuggestion(imageData)
+            var bgRecommendation = edgeScoreBasedSuggestion(imageData, objectImageData)
+            if (bgRecommendation.isNotEmpty()) recommendationList.add(bgRecommendation)
+            if (lightRecommendation.isNotEmpty()) recommendationList.add(lightRecommendation)
+            if(recommendationList.isEmpty()) recommendationList.add("The scene is ready to capture!")
+            return recommendationList
         }
 
-//        private fun lightBasedSuggestion(imageData: Bitmap): String {
-//            val hsv = Mat()
-//            Utils.bitmapToMat(imageData, hsv)
-//            Imgproc.cvtColor(hsv, hsv, Imgproc.COLOR_BGR2HSV)
-//            return "Increase light"
-//        }
+        private fun lightBasedSuggestion(imageData: Bitmap): String {
+            var recommendation = ""
+            val grayMat = Mat()
+            Utils.bitmapToMat(imageData, grayMat)
+            Imgproc.cvtColor(grayMat, grayMat, Imgproc.COLOR_BGR2GRAY)
+
+            var totalIntensity = 0.0
+            for (i in 0 until grayMat.rows()){
+                for (j in 0 until grayMat.cols()){
+                    totalIntensity += grayMat.get(i, j)[0]
+                }
+            }
+
+            // Find avg luminosity of frame
+            var avgLum = 0.0
+            avgLum = (totalIntensity/(grayMat.rows() * grayMat.cols())).toDouble()
+            if(avgLum < 100){
+                recommendation = "Increase illumination in scene"
+            }
+            return recommendation
+        }
+
+        private fun detectLightSource(imageData: Bitmap) {
+            var gaussianBlurValue = 45.0
+            val rgba = Mat()
+            Utils.bitmapToMat(imageData, rgba)
+
+            val grayScaleGaussianBlur = Mat()
+            Imgproc.cvtColor(rgba, grayScaleGaussianBlur, Imgproc.COLOR_BGR2GRAY)
+            Imgproc.GaussianBlur(grayScaleGaussianBlur, grayScaleGaussianBlur,  Size(gaussianBlurValue, gaussianBlurValue), 0.0)
+
+            val minMaxLocResultBlur = Core.minMaxLoc(grayScaleGaussianBlur)
+            // circle source of light
+            Imgproc.circle(rgba, minMaxLocResultBlur.maxLoc, 30,  Scalar(255.0), 3)
+        }
+
 
         private fun edgeScoreBasedSuggestion(imageData: Bitmap, objectImageData: Bitmap): String {
-            val bg_edges = detectEdges(imageData) - detectEdges(objectImageData)
-            var recommendation = "LGTM :)"
-            if (bg_edges > 10) {
+            val bgEdges = detectEdges(imageData) - detectEdges(objectImageData)
+            var recommendation = ""
+            if (bgEdges > 10) {
                 recommendation = "Place the product in clean background"
             }
             return recommendation
